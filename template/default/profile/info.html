@@ -1,0 +1,50 @@
+{include 'public/header.html'}
+<style>
+	.form-group {margin:0;}
+</style>
+
+<h4 class="page-title">个人信息<small class="pull-right"><a href="javascript:history.back(-1);">返回</a></small></h4>
+<div class="page-content row">
+	<div class="col-md-3">
+		<div style="text-align:center;margin-top:5px;">
+			{if empty($vo['qq']):}
+			<img src="__STATIC__/img/head.png" width="80" height="80" class="img-circle" alt="avatar"/>
+			{else:}
+			<img src="http://q1.qlogo.cn/g?b=qq&nk={$vo.qq}&s=100&t={:time()}" title="QQ{$vo.qq}"  width="80" height="80" class="img-circle" alt="avatar"/>
+			{/if}
+			<p style="margin-top:15px;"><strong>{$vo.nickname}</strong></p>
+		</div>
+	</div>
+	<div class="col-md-9">
+		<div class="form-horizontal">
+			<div class="form-group">
+				<label class="col-sm-2 control-label">简介</label>
+				<div class="col-sm-10">
+					<p class="form-control-static">{$vo.about|none}</p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">QQ</label>
+				<div class="col-sm-10">
+					<p class="form-control-static">{$vo.qq|none}</p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">邮箱</label>
+				<div class="col-sm-10">
+					<p class="form-control-static">{$vo.email|none}</p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">注册</label>
+				<div class="col-sm-10">
+					<p class="form-control-static">{:date('Y-m-d', $vo['create_time'])}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{include 'public/footer.html'}
+</body>
+</html>

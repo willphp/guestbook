@@ -1,0 +1,9 @@
+<ul class="nav nav-sidebar">
+    <li{:nav_active('index')}><a href="{:url('index/index')}">后台首页 </a></li>
+    <li{:nav_active('gbook')}><a href="{:url('gbook/index')}">留言管理</a></li>
+    <li{:nav_active('single')}><a href="{:url('single/index')}">单页管理</a></li>
+    <li{:nav_active('user')}><a href="{:url('user/index')}">用户管理</a></li>
+    <li{:nav_active('site')}><a href="{:url('site/index')}">网站配置</a></li>
+    <li{:nav_active('data')}><a href="{:url('data/clear')}">清空数据</a></li>
+    <li><a href="javascript:ajaxConfirm('{:url('api/clear')}','清除缓存');">清除缓存</a></li>
+</ul>

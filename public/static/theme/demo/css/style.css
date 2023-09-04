@@ -1,0 +1,171 @@
+* {
+    word-wrap: break-word;
+    font-size: 14px;
+}
+html,body {
+    overflow-x: hidden;
+}
+body {
+    /*background: #fff url('../img/bg.jpg') fixed no-repeat top center;*/
+}
+p {
+    word-break: break-all;
+    overflow: auto;
+}
+a:hover {
+    text-decoration: none;
+}
+.container {
+    max-width:980px;
+    overflow: hidden;
+    padding: 0;
+    margin: 0 auto;
+    background: #fff;
+}
+.navbar {
+    margin-bottom: 15px;
+}
+.navbar-right {
+    margin-right: 5px;
+}
+
+.well {
+    padding: 10px;
+    background: #f8f8f8;
+    border:1px dashed #E4E4E4;
+}
+.note-top {
+    height: 35px;
+    line-height: 35px;
+    padding: 0 10px;
+    margin-bottom: 10px;
+}
+
+.media {
+    padding:15px;
+    background: #f8f8f8;
+    border-top: 3px solid #ddd;
+    margin: 0;
+}
+.media:hover {
+    border-top: #337ab7 3px solid;
+    color: #000;
+    background-color: #FFF0E6;
+}
+.media .media-left{
+    padding:0 15px 0 0;
+}
+.media .media-object {
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    padding: 3px;
+    background-color: #FFF;
+    width: 63px;
+}
+.media .media-body {
+    border-left: 1px solid #ddd;
+    padding-left:15px;
+}
+.media-heading {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+    color: #666;
+}
+.media-content {
+    padding: 0 0 15px 0;
+    line-height: 25px;
+}
+.media-footer {
+    padding-top: 5px;
+    border-top: 1px solid #ddd;
+    color: #666;
+}
+span.time {
+    background-image: url(../img/time.png);
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 20px;
+}
+span.user {
+    background-image: url(../img/user.png);
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 20px;
+}
+span.address {
+    background-image: url(../img/address.png);
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 20px;
+}
+a.good {
+    background-image: url(../img/good.png);
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 20px;
+    color: #666;
+}
+.media .re {
+    margin: 10px 0 0 0;
+    border-top: 1px dashed #999;
+    padding:5px 0;
+}
+.media .re a{
+    color: #337ab7;
+}
+.msg-empty {
+    border-top: 1px dashed #999;
+    border-bottom: 1px dashed #999;
+    background: #f7f7f9;
+    padding:10px;
+    color: #999;
+    margin-bottom:10px;
+}
+.pagination {
+    background-color: #F7F7F7;
+    border-top: 2px solid #E4E4E4;
+    border-bottom: 1px solid #E4E4E4;
+    padding: 15px;
+    margin: 0;
+    text-align: left;
+    display: block;
+}
+
+.msg-form {
+    padding:15px;
+    text-shadow:1px 1px 1px #FFF;
+    border:1px solid #E4E4E4;
+}
+.msg-form h3 {
+    font-size: 25px;
+    padding: 5px 0 15px 75px;
+    display: block;
+    border-bottom: 1px solid #E4E4E4;
+    color: #888;
+    margin-bottom: 15px;
+    background-image: url(../img/logoMeg.jpg);
+    background-repeat: no-repeat;
+}
+.msg-form h3>span {
+    font-size:13px;
+    margin-top:8px;
+    display:block;
+}
+
+footer {
+    padding: 15px 10px 25px 10px;
+    margin-top: 5px;
+    border-top: 1px solid #E4E4E4;
+}
+
+.page-title {
+    margin-bottom: 5px;
+    padding:10px;
+    font-size: 17px;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+}
+.page-content {
+    font-size: 15px;
+    padding: 10px;
+}

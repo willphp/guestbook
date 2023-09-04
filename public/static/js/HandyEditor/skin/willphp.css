@@ -1,0 +1,33 @@
+.HandyEditor{
+	border: 1px solid #ddd;
+}
+.HandyEditor_menu{	
+	border-bottom: 1px solid #ddd;
+}
+.HandyEditor_menu_item,.HandyEditor_menu_item:visited{
+	margin: 5px 0 5px 3px;
+}
+.HandyEditor_menu_item:hover{
+	color: #2575cf;
+}
+.HandyEditor_menu_item:active{
+	color: #88b5e8;
+}
+.HandyEditor_menu_item_valid{
+	color: #88b5e8;
+}
+.HandyEditor_menu_item_invalid,
+.HandyEditor_menu_item_invalid:hover{
+	color: #acbbcc;
+}
+.HandyEditor_menu_gap{
+	border-color: #ddd;
+}
+.HandyEditor_editor{	
+	background-color: #fff;
+}
+.HandyEditor_editor blockquote {
+    background-color: #f8f8f8;
+    padding: 10px;
+    border-left: 3px solid rgb(204,204,204);
+}

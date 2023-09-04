@@ -1,0 +1,100 @@
+{include 'public/header.html'}
+
+<div class="container-fluid">
+    <div class="row row-offcanvas row-offcanvas-left">
+        <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar">
+            {include 'public/sidebar.html'}
+        </div>
+
+        <div class="col-xs-12 col-sm-9">
+            <div style="padding: 5px 0;">
+                <button type="button" class="btn btn-xs btn-success pull-left visible-xs"  data-toggle="offcanvas"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
+            </div>
+            <h3 class="sub-header">添加单页 <small class="pull-right"><a href="{:url('index')}">返回列表</a></small></h3>
+
+            <form class="form-horizontal submit-ajax" role="form" action="{:url('add')}" method="post">
+                <div class="form-group">
+                    <label class="col-sm-1 control-label">名称</label>
+                    <div class="col-sm-11">
+                        <input type="text" name="name" class="form-control" placeholder="请输入页面名称" value="" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-1 control-label">标识</label>
+                    <div class="col-sm-11">
+                        <input type="text" name="pageid" class="form-control" placeholder="请输入页面标识" value="" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-1 control-label">封面</label>
+                    <div class="col-sm-11">
+                        <input type="hidden" id="thumb" name="thumb" value="" />
+                        <div id="pic_up" class="thumb">
+                            <img style="display:none" id="pic" width="90" height="60"  alt="thumb"/>上传封面
+                            <span id="pic_del">删除</span>
+                            <input id="upload-input" type="file" accept="image/*" onchange="previewImg(this);">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-1 control-label">标题</label>
+                    <div class="col-sm-11">
+                        <input type="text" name="title" class="form-control" placeholder="请输入页面标题" value="" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-1 control-label">内容</label>
+                    <div class="col-sm-11">
+                        <textarea id="editor" name="content" style="display: none;"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-1 control-label">&nbsp;</label>
+                    <div class="col-sm-11">
+                        <input type="submit" id="submit" value="添加" class="btn btn-primary" />
+                    </div>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+</div>
+
+{include 'public/footer.html'}
+<script src="__STATIC__/js/HandyEditor/HandyEditor.min.js"></script>
+<script src="__STATIC__/js/hdeditor.js"></script>
+<script>
+    function previewImg(input) {
+        if(input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (im) {
+                var apiurl = "{:url('api/upload_base64')}";
+                var type = 'single';
+                $.post(apiurl,{base64:im.target.result,type:type},function(res){
+                    if (res.status == 1) {
+                        pic_del($("#pic"));
+                        $('#thumb').val(res.data.path);
+                        $("#pic").attr("src",res.data.path).show();
+                        $('#pic_del').show();
+                    }
+                },'json');
+            };
+            reader.readAsDataURL(input.files[0]);
+            return 1;
+        }
+    }
+    function pic_del(e){
+        var p = e.attr('src');
+        $('#thumb').val('');
+        $.post("{:url('api/image_del')}", {pic: p}, function(ret){}, 'json');
+    }
+    $('#pic_del').on('click', function() {
+        pic_del($("#pic"));
+        $("#pic").attr("src", '').hide();
+        $('#pic_del').hide();
+    });
+</script>
+</body>
+</html>

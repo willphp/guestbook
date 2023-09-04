@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{:site('site_title')}</title>
+  <meta name="keywords" content="{:site('site_kw')}">
+  <meta name="description" content="{:site('site_desc')}">
+  <link rel="stylesheet" href="__STATIC__/js/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="__STATIC__/theme/__THEME__/css/style.css?v={:site_ver()}">
+</head>
+<body>
+<div class="container">
+  <!-- 顶部菜单 -->
+  <nav class="navbar navbar-inverse navbar-static-top">
+    <div class="navbar-header">
+      <a href="{:url('index/index')}" class="navbar-brand" title="{:site('site_logo')}"><img src="__STATIC__/theme/__THEME__/img/logo1.png" height="25"/></a>
+      <button class="navbar-toggle collapsed" data-toggle='collapse' data-target='.collapse'>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="{:url('index/index')}">首页</a></li>
+        <li><a href="{:url('single/index', ['pageid'=>'about'])}">关于</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle='dropdown'>主题：{:getTheme(1)}<span class="caret"></span></a>
+          {php $theme=getTheme()}
+          <ul class="dropdown-menu">
+            {foreach $theme as $t=>$n}
+            <li><a href="?t={$t}">{$n}</a></li>
+            {/foreach}
+          </ul>
+        </li>
+        <li><a class="nav-link" href="https://qm.qq.com/cgi-bin/qm/qr?k=U7SzseDDXSbG9sB1CTEf5U10oFJOKR8-&jump_from=webapi" target="_blank">QQ群</a></li>
+      </ul>
+    </div>
+  </nav>

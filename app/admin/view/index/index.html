@@ -1,0 +1,40 @@
+{include 'public/header.html'}
+
+<div class="container-fluid">
+    <div class="row row-offcanvas row-offcanvas-left">
+        <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar">
+            {include 'public/sidebar.html'}
+        </div>
+
+        <div class="col-xs-12 col-sm-9">
+            <div style="padding: 5px 0;">
+                <button type="button" class="btn btn-xs btn-success pull-left visible-xs" data-toggle="offcanvas">
+                    <span class="glyphicon glyphicon-menu-hamburger"></span>
+                </button>
+            </div>
+            <h3 class="sub-header">管理中心</h3>
+            {php $count=db('guestbook')->where('status',0)->count()}
+            <div class="well">欢迎光临，<code>{:session('user.nickname')}</code> 待审留言：<code>{$count}</code></div>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <tbody>
+                    {foreach $info as $k=>$v}
+                    <tr>
+                        <td>{$k}</td>
+                        <td>{$v}</td>
+                    </tr>
+                    {/foreach}
+                    <tr>
+                        <td>框架版本</td>
+                        <td>__POWERED__ [ <a href="http://www.113344.com" target="_blank">查看最新版本</a> ]</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{include 'public/footer.html'}
+</body>
+</html>

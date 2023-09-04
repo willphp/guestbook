@@ -1,0 +1,129 @@
+{include 'public/header.html'}
+
+<!-- 公告 -->
+<div class="well clearfix">
+  <p><strong>公告：</strong></p>
+  {php $notice=widget('single')->get('notice')}
+  {$notice.content}
+</div>
+
+<!-- 留言顶部 -->
+{php $list=db('guestbook')->where('status', 1)->order('is_top DESC,id DESC')->paginate(5)}
+{php $count=$list->getAttr('count')}
+{php $offset=$list->getAttr('offset')}
+<div class="note-top clearfix">
+  <span class="pull-left"><a href="#msg_form" class="btn btn-primary">我要留言</a>&nbsp;&nbsp;&nbsp;&nbsp;共有留言 {$count} 条 </span>
+  <span class="pull-right">
+    {if !session('user.id'):}
+      <a href="{:url('login/login')}">登录</a>
+    {else:}
+      <a href="{:url('profile/index')}">管理</a> | <a href="{:url('profile/edit')}">资料</a> | <a href="{:url('profile/pwd')}">改密</a> | <a href="javascript:ajaxConfirm('{:url('login/logout')}','退出');">退出</a>
+    {/if}
+  </span>
+</div>
+
+<!-- 留言列表 -->
+{foreach $list as $k=>$vo}
+{php $k=$count-$k-$offset}
+<div class="media">
+  <div class="media-left media-top">
+    {if empty($vo['qq']):}
+    <img src="__STATIC__/theme/__THEME__/img/head.png" class="media-object" alt="avatar"/>
+    {else:}
+    <img src="http://q1.qlogo.cn/g?b=qq&nk={$vo.qq}&s=100&t={:time()}" title="QQ{$vo.qq}" class="media-object" alt="avatar"/>
+    {/if}
+  </div>
+  <div class="media-body">
+    <div class="media-heading">
+      <span class="user">网友：{if $vo['uid']>0:}<a href="{:url('profile/info',['uid'=>$vo['uid']])}"><strong>{$vo.name}</strong></a>{else:}<strong>{$vo.name}</strong>{/if}</span> <span class="time">时间：{$vo.create_time|get_time_ago}</span>
+      <span class="pull-right">{if $vo['is_top']==1:}<span class="text-danger">[置顶]</span>{/if} #{$k}</span>
+    </div>
+    <div class="media-content">
+      <p><strong><a href="{:url('index/view',['id'=>$vo['id']])}">{$vo.title}</a></strong></p>
+      {$vo.msg}
+      {if !empty($vo['re_msg']):}
+      <p class="re">&nbsp;&nbsp;<strong><a href="{:url('profile/info',['uid'=>$vo['re_uid']])}">{$vo.re_name}</a> 回复</strong>：{$vo.re_msg}</p>
+      {/if}
+      {if session('user.level')>1:}
+      <div id="reMsg-id{$vo.id}" style="display:none;">
+        <form method="post" class="form-inline submit-ajax" action="{:url('guestbook/replay')}">
+          <input type="hidden" name="id" value="{$vo.id}"/>
+          <div class="form-group">
+            <input type="text" name="re_msg" class="form-control" placeholder="请输入回复内容..." value="{$vo.re_msg}"/>
+          </div>
+          <button class="btn btn-primary">回复</button>
+        </form>
+      </div>
+      {/if}
+    </div>
+    <div class="media-footer">
+      <span class="pull-left address">
+        {$vo.ip|ip_format}
+        {if session('user.level')>1:}
+        <a href="javascript:;" onclick="$('#reMsg-id{$vo.id}').toggle();" title="回复留言">回复</a> |
+        <a href="javascript:ajaxConfirm('{:url('guestbook/del',['id'=>$vo['id']])}','删除',2);">删除</a> |
+        <a href="javascript:ajaxConfirm('{:url('guestbook/top',['id'=>$vo['id']])}','设置置顶',2);">置顶</a>
+        {/if}
+      </span>
+      <span class="pull-right">
+        <a class="good" href="javascript:ajaxGet('{:url('guestbook/like',['id'=>$vo['id']])}',2);">赞（{$vo.likes}）</a>
+      </span>
+    </div>
+  </div>
+</div>
+{/foreach}
+{empty $list->toArray():}
+<div class="msg-empty">暂无留言！</div>
+{/empty}
+{$list->links()}
+
+<!--留言表单-->
+<div class="msg-form" id="msg_form">
+  <h3>在线留言<span>{:site('gbook_about')}</span></h3>
+  <form class="form-horizontal submit-ajax" method="post" action="{:url('guestbook/add')}">
+    {if !session('user'):}
+    <div class="form-group">
+      <label for="name" class="col-sm-2 control-label"><span class="text-danger">*</span> 昵称</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" name="name" id="name" value="" placeholder="请输入昵称"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="qq" class="col-sm-2 control-label">QQ</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" name="qq" id="qq" value="" placeholder="请输入QQ"/>
+      </div>
+    </div>
+    {/if}
+    <div class="form-group">
+      <label for="title" class="col-sm-2 control-label"><span class="text-danger">*</span> 标题</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" name="title" id="title" value="" placeholder="请输入标题"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="msg" class="col-sm-2 control-label"><span class="text-danger">*</span> 留言</label>
+      <div class="col-sm-10">
+        <textarea class="form-control" name="msg" id="msg" rows="3" placeholder="请输入留言"></textarea>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="captcha" class="col-sm-2 control-label"><span class="hong">*</span> 验证</label>
+      <div class="col-sm-5">
+        <input type="text" name="captcha" id="captcha" class="form-control" placeholder="请输入验证码"/>
+      </div>
+      <div class="col-sm-5" style="margin-top:3px;">
+        <img src="{:url('login/captcha')}" style="cursor:pointer;" onclick="this.src='{:url('login/captcha')}?'+Math.random();" alt="captcha"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-primary">提交留言</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+{include 'public/footer.html'}
+</body>
+</html>
