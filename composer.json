@@ -1,6 +1,6 @@
 {
-  "name": "willphp/yiyu",
-  "description": "一鱼PHP框架willphp framework",
+  "name": "willphp/guestbook",
+  "description": "一鱼PHP框架留言本",
   "type": "project",
   "keywords": [
     "willphp",
