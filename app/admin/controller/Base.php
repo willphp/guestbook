@@ -73,7 +73,7 @@ abstract class Base
         $this->_jump(['删除成功', '删除失败，请先停用或设为待审'], $r, $this->backUrl);
     }
 
-    public function state($ids)
+    public function state($ids = '')
     {
         if (!$ids) {
             $this->error('请选择id');

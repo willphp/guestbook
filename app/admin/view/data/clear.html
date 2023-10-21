@@ -1,42 +1,19 @@
-{include 'public/header.html'}
-
-<div class="container-fluid">
-    <div class="row row-offcanvas row-offcanvas-left">
-        <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar">
-            {include 'public/sidebar.html'}
-        </div>
-
-        <div class="col-xs-12 col-sm-9">
-            <div style="padding: 5px 0;">
-                <button type="button" class="btn btn-xs btn-success pull-left visible-xs"  data-toggle="offcanvas"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
-            </div>
-            <h3 class="sub-header">清空数据</h3>
-            <div class="alert alert-danger">
-                <strong>警告：</strong>
-                此操作将清空除了必要之外的所有数据！
-            </div>
-
-            <form class="form-horizontal submit-ajax" role="form" action="{:url('clear')}" method="post">
-
-                    <div class="form-group">
-                        <label class="col-sm-1 control-label">管理密码</label>
-                        <div class="col-sm-11">
-                            <input type="password" name="password" class="form-control" style="width: auto;" placeholder="请输入管理密码" value="" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-1 control-label">&nbsp;</label>
-                        <div class="col-sm-11">
-                            <input type="submit" id="submit" value="确认清空" class="btn btn-primary" />
-                        </div>
-                    </div>
-                </form>
-
-
+{layout name='public/layout.html'}
+<h3 class="sub-header">清空数据</h3>
+<div class="alert alert-danger">
+    <strong>警告：</strong>此操作将清空除了必要之外的所有数据！
+</div>
+<form class="form-horizontal submit-ajax" role="form" action="{:url('clear')}" method="post">
+    <div class="form-group">
+        <label class="col-sm-1 control-label">管理密码</label>
+        <div class="col-sm-11">
+            <input type="password" name="password" class="form-control" style="width: auto;" placeholder="请输入管理密码" value="" />
         </div>
     </div>
-</div>
-
-{include 'public/footer.html'}
-</body>
-</html>
+    <div class="form-group">
+        <label class="col-sm-1 control-label">&nbsp;</label>
+        <div class="col-sm-11">
+            <input type="submit" id="submit" value="确认清空" class="btn btn-primary" />
+        </div>
+    </div>
+</form>

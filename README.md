@@ -10,7 +10,7 @@
 
 ### 技术构架
 
-- PHP框架：WillPHP v4.5.2 (php7.4.3~8.2.x)
+- PHP框架：WillPHP v4.6 (php7.4.3~8.2.x)
 - 前后台UI：Bootstrap + Jquery
 - 弹窗组件：layer mobile
 - 富文本编辑器：HandyEditor

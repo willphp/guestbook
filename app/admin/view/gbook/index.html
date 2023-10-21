@@ -1,67 +1,50 @@
-{include 'public/header.html'}
-
-<div class="container-fluid">
-    <div class="row row-offcanvas row-offcanvas-left">
-        <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar">
-            {include 'public/sidebar.html'}
-        </div>
-
-        <div class="col-xs-12 col-sm-9">
-            <div style="padding: 5px 0;">
-                <button type="button" class="btn btn-xs btn-success pull-left visible-xs"  data-toggle="offcanvas"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
-            </div>
-            <h3 class="sub-header">留言管理</h3>
-            <div class="table-responsive">
-                <button type="button" class="btn btn-success" onclick="javascript:actionConfirm('审核通过','{:url('state?params=status-1')}');">审核通过</button>
-                <button type="button" class="btn btn-info" onclick="javascript:actionConfirm('设为待审','{:url('state?params=status-0')}');">设为待审</button>
-                <button type="button" class="btn btn-danger" onclick="javascript:actionConfirm('删除','{:url('del')}');">删除</button>
-                <table class="table table-striped">
-                    <thead>
-                        <th width="50"><input type="checkbox" onclick="selectAll(this.checked)" /></th>
-                        <th>ID</th>
-                        <th>留言者</th>
-                        <th>标题</th>
-                        <th>回复</th>
-                        <th>时间</th>
-                        <th>状态</th>
-                        <th>操作</th>
-                    </thead>
-                    <tbody>
-
-                    {foreach $list as $vo}
-                    <tr>
-                        <td><input type="checkbox" name="ids" value="{$vo.id}" /> </td>
-                        <td>{$vo.id}</td>
-                        <td>{$vo.name}</td>
-                        <td>
-                            {if $vo['is_top']==1:}
-                            [置顶]
-                            {/if}
-                            <a href="{:url('replay',['id'=>$vo['id']])}" title="{$vo.msg}">{$vo.title}</a>
-                        </td>
-                        <td>{if $vo['re_uid']>0:}<span class="label label-primary">已回复</span>{else:}<span class="label label-default">未回复</span>{/if}</td>
-                        <td>{$vo.create_time|get_time_ago}</td>
-                        <td>
-                            {if $vo['status']==1:}
-                            <a href="javascript:ajaxConfirm('{:url('state?params=status-0',['ids'=>$vo['id']])}','设为待审',2);" class="btn btn-xs btn-success">已审</a>
-                            {else:}
-                            <a href="javascript:ajaxConfirm('{:url('state?params=status-1',['ids'=>$vo['id']])}','审核通过',2);" class="btn btn-xs btn-danger">待审</a>
-                            {/if}
-                        </td>
-                        <td>
-                            <a href="javascript:ajaxConfirm('{:url('del',['ids'=>$vo['id']])}','删除',2);" class="btn btn-xs btn-danger">删除</a>
-                        </td>
-                    </tr>
-                    {/foreach}
-
-                    </tbody>
-                </table>
-                {$list->links()}
-            </div>
-        </div>
-    </div>
+{layout name='public/layout.html'}
+<h3 class="sub-header">留言管理</h3>
+<div class="table-responsive">
+    <button type="button" class="btn btn-success" onclick="actionConfirm('审核通过','{:url('state?params=status-1')}');">审核通过
+    </button>
+    <button type="button" class="btn btn-info"
+            onclick="actionConfirm('设为待审','{:url('state?params=status-0')}');">设为待审
+    </button>
+    <button type="button" class="btn btn-danger" onclick="actionConfirm('删除','{:url('del')}');">删除
+    </button>
+    <table class="table table-striped">
+        <thead>
+        <th width="50"><input type="checkbox" onclick="selectAll(this.checked)"/></th>
+        <th>ID</th>
+        <th>留言者</th>
+        <th>标题</th>
+        <th>回复</th>
+        <th>时间</th>
+        <th>状态</th>
+        <th>操作</th>
+        </thead>
+        <tbody>
+        {foreach $list as $vo}
+        <tr>
+            <td><input type="checkbox" name="ids" value="{$vo.id}"/></td>
+            <td>{$vo.id}</td>
+            <td>{$vo.name}</td>
+            <td>
+                {if $vo['is_top']==1:}[置顶]{/if}
+                <a href="{:url('replay',['id'=>$vo['id']])}" title="{$vo.msg}">{$vo.title}</a>
+            </td>
+            <td>{if $vo['re_uid']>0:}<span class="label label-primary">已回复</span>{else:}<span class="label label-default">未回复</span>{/if}</td>
+            <td>{$vo.create_time|get_time_ago}</td>
+            <td>
+                {if $vo['status']==1:}
+                <a href="javascript:ajaxConfirm('{:url('state?params=status-0',['ids'=>$vo['id']])}','设为待审',2);" class="btn btn-xs btn-success">已审</a>
+                {else:}
+                <a href="javascript:ajaxConfirm('{:url('state?params=status-1',['ids'=>$vo['id']])}','审核通过',2);" class="btn btn-xs btn-danger">待审</a>
+                {/if}
+            </td>
+            <td>
+                <a href="javascript:ajaxConfirm('{:url('del',['ids'=>$vo['id']])}','删除',2);" class="btn btn-xs btn-danger">删除</a>
+            </td>
+        </tr>
+        {/foreach}
+        </tbody>
+    </table>
+    {$list->links()}
 </div>
 
-{include 'public/footer.html'}
-</body>
-</html>

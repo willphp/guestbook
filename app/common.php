@@ -69,14 +69,6 @@ function build_radios(string $name, $options, $selected = ''): string
 }
 
 /**
- * 获取int类型的IP
- */
-function get_int_ip()
-{
-    return get_ip(1);
-}
-
-/**
  * 默认值
  */
 function none($value, $default = '暂无')
@@ -84,6 +76,13 @@ function none($value, $default = '暂无')
     return !empty($value)? $value : $default;
 }
 
+/**
+ * 获取int类型的IP
+ */
+function get_int_ip()
+{
+    return get_ip(1);
+}
 /**
  * 格式化输出IP
  */

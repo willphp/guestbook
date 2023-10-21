@@ -1,7 +1,6 @@
 <?php
 declare(strict_types=1);
 namespace app\admin\controller;
-
 class Gbook extends Base
 {
     protected string $middleware = 'auth';
