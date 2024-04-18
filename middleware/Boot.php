@@ -1,26 +1,21 @@
 <?php
-/*----------------------------------------------------------------
- | Software: [WillPHP framework]
- | Site: 113344.com
- |----------------------------------------------------------------
- | Author: 无念 <24203741@qq.com>
- | WeChat: www113344
- | Copyright (c) 2020-2023, 113344.com. All Rights Reserved.
- |---------------------------------------------------------------*/
+/*------------------------------------------------------------------
+ | Software: APHP - A PHP TOP Framework
+ | Site: https://aphp.top
+ |------------------------------------------------------------------
+ | CopyRight(C)2020-2024 大松栩<24203741@qq.com>,All Rights Reserved.
+ |-----------------------------------------------------------------*/
 declare(strict_types=1);
 
 namespace middleware;
 
 use Closure;
 
-/**
- * 全局中件间
- */
 class Boot
 {
     public function run(Closure $next): void
     {
-        trace('欢迎使用 '.__POWERED__.' 全局中间件');
+        header('X-Powered-By:APHP' . __VERSION__);
         $next();
     }
 }

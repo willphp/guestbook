@@ -1,0 +1,23 @@
+{include file='public/header.html'}
+
+<div class="top-header">
+    <div class="container">
+        <h2 class="top-title">{$vo.name}</h2>
+        <p class="lead top-description">{$vo.summary}</p>
+    </div>
+</div>
+
+<div class="container mtn">
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">{$vo.title}</h3>
+        </div>
+        <div class="panel-body">
+            {$vo.content}
+        </div>
+    </div>
+
+</div>
+
+{include file='public/footer.html'}

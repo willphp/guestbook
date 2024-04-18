@@ -1,7 +1,7 @@
 var he = HE.getEditor('editor',{
 	  autoHeight : true,
 	  uploadPhoto : true,
-	  uploadPhotoHandler : base_url + '/api/editor_upload?csrf_token=' + csrf_token,
+	  uploadPhotoHandler : base_url + '/api/editor_upload',
 	  uploadPhotoSize : 1048576, //1M 
 	  uploadPhotoType : 'gif,png,jpg,jpeg',
 	  uploadPhotoSizeError : '不能上传大于1MB的图片',

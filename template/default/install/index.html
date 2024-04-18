@@ -1,0 +1,52 @@
+<html lang="zh-CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>一鱼留言板安装程序</title>
+    <link href="./static/js/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <style>
+        .wrapper {
+            border: #CCC 1px solid;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px 30px;
+            background-color: #FFF;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body style="background-color:#F5F5F5">
+<div class="wrapper">
+    <h3><a href="#">一鱼留言板安装程序</a></h3>
+    <hr/>
+
+    <form action="install.php" method="post">
+        <div class="form-group">
+            <label for="db_host">数据库服务器：</label>
+            <input type="text" class="form-control" id="db_host" name="db_host" value="localhost"/>
+        </div>
+        <div class="form-group">
+            <label for="db_user">用户名：</label>
+            <input type="text" class="form-control" id="db_user" name="db_user" value="root"/>
+        </div>
+        <div class="form-group">
+            <label for="db_pwd">密码：</label>
+            <input type="text" class="form-control" id="db_pwd" name="db_pwd" value=""/>
+        </div>
+        <div class="form-group">
+            <label for="db_name">数据库名(<span style="color:red">需先建立数据库</span>)：</label>
+            <input type="text" class="form-control" id="db_name" name="db_name" value="willbook01db"/>
+        </div>
+        <div class="form-group">
+            <label for="db_prefix">数据库表前缀：</label>
+            <input type="text" class="form-control" id="db_prefix" name="db_prefix" value="wp_"/>
+        </div>
+        <div class="form-group">
+            <label for="db_charset">数据库编码：</label>
+            <input type="text" class="form-control" id="db_charset" name="db_charset" value="utf8"/>
+        </div>
+        <hr/>
+        <input type="submit" value="确认安装" class="btn btn-primary btn-block" name="install"/>
+    </form>
+</div>
+</body>
+</html>

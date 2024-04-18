@@ -1,0 +1,38 @@
+{include file='public/header.html'}
+
+<div class="top-header">
+    <div class="container">
+        <h2 class="top-title">用户</h2>
+        <p class="lead top-description">UserList</p>
+    </div>
+</div>
+
+<div class="container mtn">
+    <div class="panel panel-default">
+        <div class="panel-heading">用户列表<span class="pull-right"><a href="javascript:history.back(-1);">返回</a></span></span></div>
+        <div class="panel-body row text-center">
+            {php $list=db('user')->where('status=1')->order('id DESC')->paginate(12)}
+            {foreach $list as $vo}
+            <div class="col-xs-6 col-md-4 col-lg-3">
+                <div class="thumbnail">
+                    <a href="{:url('user/info',['id'=>$vo['id']])}">
+                    {if empty($vo['qq']):}
+                    <img src="__STATIC__/img/avatar.png" class="img-circle" width="80" height="80" alt="avatar"/>
+                    {else:}
+                    <img src="http://q1.qlogo.cn/g?b=qq&nk={$vo.qq}&s=100&t={:time()}" title="QQ{$vo.qq}" class="img-circle" width="80" height="80" alt="avatar"/>
+                    </a>
+                    {/if}
+                    <div class="caption">
+                        <h4><a href="{:url('user/info',['id'=>$vo['id']])}">{$vo.nickname}</a></h4>
+                        <p>{$vo.bio|default='暂无格言'}</p>
+                        <p>{$vo.create_time|get_time_ago}加入</p>
+                    </div>
+                </div>
+            </div>
+            {/foreach}
+        </div>
+        <div class="panel-footer">{$list->pageLink()}</div>
+    </div>
+</div>
+
+{include file='public/footer.html'}

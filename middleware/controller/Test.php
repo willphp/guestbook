@@ -1,21 +1,16 @@
 <?php
-/*----------------------------------------------------------------
- | Software: [WillPHP framework]
- | Site: 113344.com
- |----------------------------------------------------------------
- | Author: 无念 <24203741@qq.com>
- | WeChat: www113344
- | Copyright (c) 2020-2023, 113344.com. All Rights Reserved.
- |---------------------------------------------------------------*/
+/*------------------------------------------------------------------
+ | Software: APHP - A PHP TOP Framework
+ | Site: https://aphp.top
+ |------------------------------------------------------------------
+ | CopyRight(C)2020-2024 大松栩<24203741@qq.com>,All Rights Reserved.
+ |-----------------------------------------------------------------*/
 declare(strict_types=1);
 
 namespace middleware\controller;
 
 use Closure;
 
-/**
- * 测试示例
- */
 class Test
 {
     public function run(Closure $next, array $params = []): void

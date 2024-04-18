@@ -2,25 +2,14 @@
 declare(strict_types=1);
 
 namespace app\index\controller;
-
-use willphp\core\Jump;
-
+use aphp\core\Jump;
 class Profile
 {
     use Jump;
-
-    public function info(int $uid)
-    {
-        $vo = db('user')->where('id', $uid)->find();
-        if (!$vo) {
-            $this->error('用户不存在');
-        }
-        return view()->with('vo', $vo);
-    }
+    protected string $middleware = 'auth'; //登录验证
 
     public function index()
     {
-        $this->_check_login('session.user');
         $uid = session('user.id');
         $user = model('common.user')->find($uid);
         $list = db('guestbook')->where('uid', $uid)->paginate(5);
@@ -29,15 +18,14 @@ class Profile
 
     public function del_msg(int $id)
     {
-        $this->_check_login('session.user');
         $uid = session('user.id');
         $r = db('guestbook')->where('id', $id)->where('uid', $uid)->delete();
         $this->_jump(['删除成功', '删除失败'], $r, 'index');
     }
 
+    //修改资料
     public function edit(array $req)
     {
-        $this->_check_login('session.user');
         $uid = session('user.id');
         $user = model('common.user')->find($uid);
         if ($this->isPost()) {
@@ -46,10 +34,9 @@ class Profile
         }
         return view()->with('vo', $user->toArray());
     }
-
-    public function pwd(array $req)
+    //修改密码
+    public function password(array $req)
     {
-        $this->_check_login('session.user');
         if ($this->isPost()) {
             $user = model('common.user');
             $r = $user->changePwd($req);

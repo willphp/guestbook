@@ -3,11 +3,18 @@ declare(strict_types=1);
 
 namespace app\index\controller;
 
-use willphp\core\Jump;
+use aphp\core\Jump;
+use extend\captcha\Captcha;
 
 class Login
 {
     use Jump;
+
+    //验证码
+    public function captcha()
+    {
+        return (new Captcha())->make();
+    }
 
     //登录
     public function login(array $req)
@@ -28,18 +35,12 @@ class Login
     }
 
     //注册
-    public function reg(array $req)
+    public function register(array $req)
     {
         if ($this->isPost()) {
             $r = model('common.user')->save($req);
             $this->_jump(['注册成功', '注册失败'], $r, 'login?from=' . $req['username']);
         }
         return view();
-    }
-
-    //验证码
-    public function captcha()
-    {
-        return (new \extend\captcha\Captcha())->make();
     }
 }

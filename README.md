@@ -1,6 +1,10 @@
 ## 一鱼留言本v3
 
->一鱼留言本是一个用willphp框架开发的简单留言系统
+>一鱼留言本是一个用aphp框架开发的简单留言本
+
+### 演示地址
+
+[http://guestbook.aphp.top](http://guestbook.aphp.top)
 
 ### 系统特色
 
@@ -10,7 +14,7 @@
 
 ### 技术构架
 
-- PHP框架：WillPHP v4.6 (php7.4.3~8.2.x)
+- PHP框架：APHP v5.0.3 (php7.4.3~8.3.x)
 - 前后台UI：Bootstrap + Jquery
 - 弹窗组件：layer mobile
 - 富文本编辑器：HandyEditor
@@ -29,10 +33,32 @@
 - 网站配置：添加，修改，删除配置，生成配置文件。
 - 数据管理：清空数据，清除缓存。
 
-### 交流Q群
+### URL重写
 
->QQ群1：325825297 QQ群2：16008861
+Nginx规则：
 
-### 联系作者
+```
+location / {
+	if (!-e $request_filename) {
+		rewrite  ^(.*)$  /index.php/$1  last;
+	}
+}
+```
 
-官网：[113344.com](http://www.113344.com) 无念(24203741@qq.com) 
+Apache规则：
+
+```
+<IfModule mod_rewrite.c>
+  Options +FollowSymlinks -Multiviews
+  RewriteEngine On
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^(.*)$ index.php? [L,E=PATH_INFO:$1]
+</IfModule>
+```
+
+### 技术支持
+
+QQ群1：325825297  QQ群2：16008861
+
+官网：[aphp.top](https://www.aphp.top) 作者：大松栩(24203741@qq.com) 

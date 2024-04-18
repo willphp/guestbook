@@ -1,8 +1,7 @@
 <?php
 declare(strict_types=1);
-
 namespace app\index\controller;
-use willphp\core\Jump;
+use aphp\core\Jump;
 
 class Index
 {
@@ -12,11 +11,11 @@ class Index
         return view();
     }
 
-    public function view(int $id)
+    public function single(string $sign = 'about')
     {
-        $vo = db('guestbook')->where('id', $id)->find();
+        $vo = db('single')->where('sign', $sign)->find();
         if (!$vo) {
-            $this->error('留言不存在');
+            $this->error('页面不存在');
         }
         return view()->with('vo', $vo);
     }

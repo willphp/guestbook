@@ -1,0 +1,30 @@
+{include file='public/header.html'}
+{include file='public/cp_menu.html'}
+
+<div class="container mtn">
+    <div class="panel panel-default">
+        <div class="panel-heading">管理中心<span class="pull-right"><a href="javascript:ajaxConfirm('{:url('api/clear')}','清除缓存')">清除缓存</a></span></div>
+        <div class="panel-body">
+            欢迎 <code>{:session('user.nickname')}</code> 光临! 当前时间：{:date('Y-m-d H:i:s')} | <a href="javascript:ajaxConfirm('{:url('login/logout')}','退出')">退出</a>
+        </div>
+        <table class="table">
+            <colgroup>
+                <col width="50%">
+                <col>
+            </colgroup>
+            <tbody>
+            {foreach $sys as $k=>$v}
+            <tr>
+                <td>{$k}</td>
+                <td>{$v}</td>
+            </tr>
+            {/foreach}
+            <tr>
+                <td>框架版本</td>
+                <td>__POWERED__ [ <a href="https://www.aphp,top" target="_blank">查看新版</a> ] </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{include file='public/footer.html'}

@@ -1,9 +1,3 @@
-var csrf_token = $('meta[name="csrf-token"]').attr('content');
-$.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': csrf_token
-    }
-}); 
 //提示信息
 function toast(msg, timer) {
 	var timer = timer || 2;
@@ -69,15 +63,19 @@ function selectAll(selectStatus) {
 }
 //多选ajax操作确认
 function actionConfirm(action, url) {
-	var ids = [];	
+	var ids = [];
 	$('tbody input').each(function(index, el) {
 		if($(this).prop('checked')){
-			ids.push($(this).val())
+			ids.push($(this).val());
 		}
-	});	
+	});
+	if (ids.length == 0) {
+		toast('请选择ID');
+		return;
+	}
 	var msg = '确认要'+action+'吗？'+ids.toString();
 	layer.open({content:msg, btn:['确认','取消'], yes:function(index) {
-			$.post(url,{ids:ids},function(res){					
+			$.post(url,{ids:ids.toString()},function(res){
 				if (res.status == 1) {						
 					toast(res.msg);				
 		            setTimeout(function(){

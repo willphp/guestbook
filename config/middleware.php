@@ -1,21 +1,18 @@
 <?php
-/*----------------------------------------------------------------
- | Software: [WillPHP framework]
- | Site: 113344.com
- |----------------------------------------------------------------
- | Author: 无念 <24203741@qq.com>
- | WeChat: www113344
- | Copyright (c) 2020-2023, 113344.com. All Rights Reserved.
- |---------------------------------------------------------------*/
+/*------------------------------------------------------------------
+ | Software: APHP - A PHP TOP Framework
+ | Site: https://aphp.top
+ |------------------------------------------------------------------
+ | CopyRight(C)2020-2024 大松栩<24203741@qq.com>,All Rights Reserved.
+ |-----------------------------------------------------------------*/
 return [
     //控制器中间件
     'controller' => [
         'auth' => [
-            \middleware\controller\Auth::class, //权限检测
+            \middleware\controller\Auth::class, //登录验证
         ],
-        'test' => [
-            \middleware\controller\Test::class, //测试
-            \middleware\controller\Run::class, //运行
+        'rbac' => [
+            \middleware\controller\Rbac::class, //权限验证
         ],
     ],
     //全局中间件

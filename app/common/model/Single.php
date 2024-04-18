@@ -1,17 +1,14 @@
 <?php
 declare(strict_types=1);
-
 namespace app\common\model;
-
-use willphp\core\Model;
-
+use aphp\core\Model;
 class Single extends Model
 {
-    protected string $table = 'single';
-    protected string $pk = 'id';
+	protected string $table = 'single';
+	protected string $pk = 'id';
     protected array $validate = [
-        ['name', 'chs', '名称为中文', AT_MUST, IN_BOTH],
-        ['pageid', 'string', '标识格式错误', AT_MUST, IN_BOTH],
+        ['sign', 'required', '标识格式错误', AT_MUST, IN_BOTH],
+        ['name', 'chs', '名称必须中文', AT_MUST, IN_BOTH],
         ['title', 'required', '标题必须', AT_MUST, IN_BOTH],
         ['content', 'required', '内容必须', AT_MUST, IN_BOTH],
     ];
@@ -21,6 +18,6 @@ class Single extends Model
 
     protected function _before_delete(array $data): void
     {
-        $this->db = $this->db->where('status', 0); //停用后才能删除
+        $this->db = $this->db->where('status=0');
     }
 }
